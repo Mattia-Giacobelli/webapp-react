@@ -23,7 +23,7 @@ function MoviesProvider({ children }) {
         <MoviesContext.Provider
             value={{ movies, getMovies }}>
             {children}
-        </MoviesContext.Provider>S
+        </MoviesContext.Provider>
     )
 }
 
