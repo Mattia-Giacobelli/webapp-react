@@ -19,6 +19,7 @@ function MoviesProvider({ children }) {
     }
 
 
+
     return (
         <MoviesContext.Provider
             value={{ movies, getMovies }}>
