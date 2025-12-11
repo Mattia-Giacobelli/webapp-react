@@ -1,0 +1,10 @@
+@import url('bootstrap');
+@import url('bootstrap-icons');
+
+
+/*HEADER*/
+header {
+    .header-bcg {
+        background-color: aliceblue;
+    }
+}
