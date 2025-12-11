@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useMovies } from "../Contexts/MoviesContext"
+import { Link } from "react-router-dom"
 
 
 
@@ -19,14 +20,16 @@ export default function HomePage() {
                     {movies.map(movie => {
                         return (
                             <div key={movie.id} className="col">
-                                <div className="card" >
-                                    <img src={`http://localhost:3000/img/movies_cover/${movie.image}`} alt="" />
-                                    <h4>
-                                        {movie.title}
-                                    </h4>
-                                    <span>{movie.genre}</span>
-                                    <p>{movie.abstract}</p>
-                                </div>
+                                <Link to={`/${movie.id}`}>
+                                    <div className="card" >
+                                        <img src={`http://localhost:3000/img/movies_cover/${movie.image}`} alt="" />
+                                        <h4>
+                                            {movie.title}
+                                        </h4>
+                                        <span>{movie.genre}</span>
+                                        <p>{movie.abstract}</p>
+                                    </div>
+                                </Link>
                             </div>
                         )
                     })}

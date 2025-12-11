@@ -2,6 +2,12 @@
 @import url('bootstrap-icons');
 
 
+/*Typography*/
+a {
+    text-decoration: none;
+}
+
+
 /*HEADER*/
 header {
 
