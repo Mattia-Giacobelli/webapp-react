@@ -1,6 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { ChaoticOrbit } from 'ldrs/react'
+import 'ldrs/react/ChaoticOrbit.css'
+
 
 export default function MoviePage() {
 
@@ -10,6 +13,9 @@ export default function MoviePage() {
     //Take id from route params
     const { id } = useParams()
 
+    //Create loader variable
+    const [loading, setLoading] = useState(true)
+
     //Ajax call for single movie
     function getSingleMovie() {
         axios.get(`http://localhost:3000/api/movies/${id}`)
@@ -18,22 +24,46 @@ export default function MoviePage() {
                 console.log(res.data);
 
             })
+            .finally(() => setLoading(false))
     }
 
 
     //Use effect make ajax call on page load
     useEffect(getSingleMovie, [])
 
+
+
     return (
         <>
-            <div key={movie.id} className="col">
-                <div className="card" >
-                    <img src={`http://localhost:3000/img/movies_cover/${movie.image}`} alt="" />
+            <div className="container d-flex justify-content-between">
+                <div key={movie.id} className="my-card" >
+                    <div className="img-container d-flex justify-content-center">
+                        <img src={`http://localhost:3000/img/movies_cover/${movie.image}`} alt="" />
+                    </div>
                     <h4>
                         {movie.title}
                     </h4>
                     <span>{movie.genre}</span>
                     <p>{movie.abstract}</p>
+                </div>
+                <div className="my-card">
+
+                    {loading ?
+                        <ChaoticOrbit
+                            size="35"
+                            speed="1.5"
+                            color="black"
+                        />
+                        :
+
+                        movie.reviews.map(review => {
+                            <div key={review.id} >
+                                <span >{review.name}</span>
+                                <span >{`${review.vote}⭐`}</span>
+                                <span >{review.text}</span>
+                            </div>
+                        })
+                    }
                 </div>
             </div>
         </>

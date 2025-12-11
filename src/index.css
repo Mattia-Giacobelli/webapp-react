@@ -23,4 +23,18 @@ header {
 /*MAIN*/
 main {
     margin-bottom: 3rem;
+
+    .my-card {
+        height: 75vh;
+
+        img {
+            width: 300px;
+        }
+    }
+}
+
+
+/*Footer*/
+footer {
+    padding-bottom: 1rem;
 }
