@@ -40,14 +40,14 @@ export default function MoviePage() {
                     <div className="img-container d-flex justify-content-center">
                         <img src={`http://localhost:3000/img/movies_cover/${movie.image}`} alt="" />
                     </div>
-                    <h4>
+                    <h2>
                         {movie.title}
-                    </h4>
+                    </h2>
                     <span>{movie.genre}</span>
                     <p>{movie.abstract}</p>
                 </div>
                 <div className="my-card">
-
+                    <h4>Ratings</h4>
                     {loading ?
                         <ChaoticOrbit
                             size="35"
@@ -55,14 +55,15 @@ export default function MoviePage() {
                             color="black"
                         />
                         :
-
-                        movie.reviews.map(review => {
-                            <div key={review.id} >
-                                <span >{review.name}</span>
-                                <span >{`${review.vote}⭐`}</span>
-                                <span >{review.text}</span>
+                        movie.reviews.map(review =>
+                            <div key={review.id} className="review" >
+                                <div className="d-flex justify-content-between">
+                                    <div >{review.name}</div>
+                                    <div >{`${review.vote}⭐`}</div>
+                                </div>
+                                <div className="text" >{review.text}</div>
                             </div>
-                        })
+                        )
                     }
                 </div>
             </div>

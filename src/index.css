@@ -24,11 +24,40 @@ header {
 main {
     margin-bottom: 3rem;
 
+    .row {
+        min-height: 75vh;
+
+        .card {
+            height: 500px;
+
+            .card-img-top {
+                height: 300px;
+                border: 1px solid gray;
+            }
+
+            .text {
+                padding: 10px;
+                font-size: 0.8rem;
+                overflow-y: hidden;
+            }
+        }
+    }
+
     .my-card {
-        height: 75vh;
+        min-height: 75vh;
 
         img {
             width: 300px;
+
+        }
+
+        .review {
+            margin-bottom: 1rem;
+            background-color: whitesmoke;
+            padding: 5px;
+            border: 1px solid whitesmoke;
+            border-radius: 15px;
+
         }
     }
 }
