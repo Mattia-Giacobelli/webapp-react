@@ -16,6 +16,14 @@ export default function MoviePage() {
     //Create loader variable
     const [loading, setLoading] = useState(true)
 
+    //Create form content varibles
+    const [name, setName] = useState("")
+    const [vote, setVote] = useState("")
+    const [text, setText] = useState("")
+    const [formData, setFormData] = useState({})
+
+
+
     //Ajax call for single movie
     function getSingleMovie() {
         axios.get(`http://localhost:3000/api/movies/${id}`)
@@ -27,6 +35,30 @@ export default function MoviePage() {
             .finally(() => setLoading(false))
     }
 
+
+    //Jandle Form submit
+
+    function handleSubmit(e) {
+        e.preventDefault()
+
+        const formDataUpdate = {
+            movie_id: id,
+            name: name,
+            vote: vote,
+            text: text
+        }
+
+        setFormData(formDataUpdate)
+
+
+        axios.post(`http://localhost:3000/api/movies/${id}/reviews`, formData)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     //Use effect make ajax call on page load
     useEffect(getSingleMovie, [])
@@ -48,6 +80,47 @@ export default function MoviePage() {
                 </div>
                 <div className="my-card">
                     <h4>Ratings</h4>
+
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="name" className="form-label">Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                className="form-control"
+                                placeholder="Your name"
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="vote" className="form-label">Vote</label>
+                            <input
+                                type="number"
+                                name="vote"
+                                id="vote"
+                                className="form-control"
+                                placeholder="Your vote"
+                                value={vote}
+                                onChange={e => setVote(e.target.value)}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="text" className="form-label">Review</label>
+                            <textarea rows="4"
+                                name="text"
+                                id="text"
+                                className="form-control"
+                                placeholder="Write you review here"
+                                value={text}
+                                onChange={e => setText(e.target.value)}
+                            />
+                        </div>
+                        <button className="btn btn-primary" type="submit">Submit Review</button>
+                    </form>
+
+
                     {loading ?
                         <ChaoticOrbit
                             size="35"
