@@ -94,7 +94,6 @@ export default function MoviePage() {
                         </div>
                         <div className="my-card">
                             <h4>Ratings</h4>
-
                             <ReviewsForm movieId={id} refreshMovies={getSingleMovie} />
                         </div>
                     </div>

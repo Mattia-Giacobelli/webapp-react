@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function ReviewsForm({ movieId, refreshMovies }) {
 
@@ -7,7 +7,8 @@ export default function ReviewsForm({ movieId, refreshMovies }) {
     const [name, setName] = useState("")
     const [vote, setVote] = useState("1")
     const [text, setText] = useState("")
-
+    const [pageError, setPageError] = useState('')
+    let error
 
     function handleFormReviewSubmit(e) {
 
@@ -22,22 +23,34 @@ export default function ReviewsForm({ movieId, refreshMovies }) {
         axios.post(`http://localhost:3000/api/movies/${movieId}/reviews`, formDataUpdate)
             .then(res => {
                 console.log(res);
+                if (res.data.status === 400) {
+                    setPageError(res.data.error)
+                    error = res.data.error
+                    console.log(error);
+                } else if (res.status === 201) {
+                    setPageError('')
+                    error = ''
+                    console.log(error);
+                }
+
             })
-            .catch(err => {
-                console.log(err);
-            })
+
             .finally(() => {
                 setName("")
-                setVote("")
+                setVote("1")
                 setText("")
-                refreshMovies()
+                if (error != '') {
+                } else if (error === '') {
+                    refreshMovies()
+                }
+                console.log(error);
             })
 
     }
 
-
     return (
         <>
+            {pageError != '' ? <h5>{pageError}</h5> : <> </>}
             <form onSubmit={handleFormReviewSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name</label>
