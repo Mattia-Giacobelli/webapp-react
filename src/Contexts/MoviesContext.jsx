@@ -8,6 +8,9 @@ function MoviesProvider({ children }) {
     //Create movies variable
     const [movies, setMovies] = useState([])
 
+    //Create loader variable
+    const [loading, setLoading] = useState(true)
+
 
     //Ajax call for movies
     function getMovies() {
@@ -16,13 +19,25 @@ function MoviesProvider({ children }) {
             .then(res => {
                 setMovies(res.data)
             })
+            .finally(() => setTimeout(showLoader, 800))
     }
+
+
+    //Set loader
+    function showLoader() {
+        setLoading(false)
+    }
+
+
+
 
 
 
     return (
         <MoviesContext.Provider
-            value={{ movies, getMovies }}>
+            value={{
+                movies, getMovies, loading, setLoading, showLoader
+            }}>
             {children}
         </MoviesContext.Provider>
     )

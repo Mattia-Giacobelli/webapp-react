@@ -24,6 +24,13 @@ header {
 main {
     margin-bottom: 3rem;
 
+    .loader {
+        min-height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .row {
         min-height: 75vh;
 
@@ -51,15 +58,20 @@ main {
 
         }
 
-        .review {
-            margin-bottom: 1rem;
-            background-color: whitesmoke;
-            padding: 5px;
-            border: 1px solid whitesmoke;
-            border-radius: 15px;
 
-        }
     }
+
+    .review {
+        margin-bottom: 1rem;
+        background-color: whitesmoke;
+        padding: 5px;
+        border: 1px solid whitesmoke;
+        border-radius: 15px;
+        padding: 1rem;
+
+    }
+
+    form {}
 }
 
 
