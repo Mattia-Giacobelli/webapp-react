@@ -7,6 +7,10 @@ a {
     text-decoration: none;
 }
 
+.stars {
+    color: goldenrod;
+}
+
 
 /*HEADER*/
 header {
@@ -71,7 +75,6 @@ main {
 
     }
 
-    form {}
 }
 
 

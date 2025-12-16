@@ -40,6 +40,22 @@ export default function MoviePage() {
 
     console.log(loading);
 
+    //Cycle to render stars based on vote
+    function getStars(maxVote) {
+        const stars = []
+        for (let i = 1; i <= maxVote; i++) {
+            const item = <i key={i} className="bi bi-star-fill stars"></i>
+            stars.push(item)
+        }
+        if (maxVote < 5) {
+            for (let i = 1; i <= 5 - maxVote; i++) {
+                const item = <i key={i + 5} className="bi bi-star stars"></i>
+                stars.push(item)
+            }
+        }
+
+        return stars
+    }
 
 
 
@@ -87,7 +103,15 @@ export default function MoviePage() {
                             <div key={review.id} className="review" >
                                 <div className="d-flex justify-content-between">
                                     <div >{review.name}</div>
-                                    <div >{`${review.vote}⭐`}</div>
+                                    <div>
+                                        <span>{review.vote}</span>
+                                        <span>{getStars(review.vote).map(star => {
+                                            return (
+                                                star
+                                            )
+                                        })}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className="text" >{review.text}</div>
                             </div>
